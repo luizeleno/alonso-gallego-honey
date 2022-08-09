@@ -1,0 +1,77 @@
+<script>
+
+function analisar() {
+
+    s = '<h2>Resultados:</h2><p>';
+    
+    ativas = [3, 5, 7, 9, 13, 20, 26, 27, 35, 37, 41, 43, 46, 48, 51, 61, 67, 74, 75, 77];
+    reflexivas = [10, 16, 18, 19, 28, 31, 32, 34, 36, 39, 42, 44, 49, 55, 58, 63, 65, 69, 70, 79];
+    teoricas = [2, 4, 6, 11, 15, 17, 21, 23, 25, 29, 33, 45, 50, 54, 60, 64, 66, 71, 78, 80];
+    pragmaticas = [1, 8, 12, 14, 22, 24, 30, 38, 40, 47, 52, 53, 56, 57, 59, 62, 68, 72, 73, 76];
+    
+    ativo = 0;
+    reflexivo = 0;
+    teorico = 0;
+    pragmatico = 0;
+    
+    respostas = [];
+    
+    for(n=1; n <= 80; n++) {
+        id = "ponto" + n
+        ponto = document.getElementById(id);
+        if(ponto.checked) {
+            respostas.push(n);
+            if(ativas.includes(n))
+                ativo += 1;
+            if(reflexivas.includes(n))
+                reflexivo += 1;
+            if(teoricas.includes(n))
+                teorico += 1;
+            if(pragmaticas.includes(n))
+                pragmatico += 1;
+        }
+    }
+    
+//     s += '<p>Resultados: ' + [ativo, reflexivo, teorico, pragmatico] + "</p>";
+    result = resultado(ativo, reflexivo, teorico, pragmatico);
+    
+//     s += "Pontos selecionados:" + respostas;
+    s += "<h3>Seus estilos:</h3>";
+    
+    if(result.includes("ativo"))
+        s += "<p><b>Ativo:</b> {{site.data.questionario.ativo}}</p>";
+    if(result.includes("reflexivo"))
+        s += "<p><b>Reflexivo:</b> {{site.data.questionario.reflexivo}}</p>";
+    if(result.includes("teorico"))
+        s += "<p><b>Teórico:</b> {{site.data.questionario.teorico}}</p>";
+    if(result.includes("pragmatico"))
+        s += "<p><b>Pragmático:</b> {{site.data.questionario.pragmatico}}</p>";
+    
+    document.getElementById("result").innerHTML = s;
+    document.getElementById("limpar").hidden = false;
+}
+
+function resultado(ativo, reflexivo, teorico, pragmatico) {
+    classe = [];
+    if(ativo >= reflexivo && ativo >= teorico && ativo >= pragmatico)
+        classe.push("ativo");
+    if(reflexivo >= teorico && reflexivo >= pragmatico && reflexivo >= ativo)
+        classe.push("reflexivo");
+    if(teorico >= pragmatico && teorico >= ativo && teorico >= reflexivo)
+        classe.push("teorico");    
+    if(pragmatico >= ativo && pragmatico >= reflexivo && pragmatico >= teorico)
+        classe.push("pragmatico");
+    return classe;
+}
+
+function limpar() {
+    document.getElementById("result").innerHTML = '';
+    for(n=1; n <= 80; n++) {
+        id = "ponto" + n
+        ponto = document.getElementById(id);
+        ponto.checked = false;
+    }
+    document.getElementById("limpar").hidden = true;
+}
+
+</script>
