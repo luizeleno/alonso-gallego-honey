@@ -1,7 +1,7 @@
 baseurl: /alonso-gallego-honey
 
-#theme: jekyll-theme-architect
-# outros temas aqui: https://github.com/pages-themes
+theme: jekyll-theme-hacker
+#outros temas aqui: https://github.com/pages-themes
 
 title: QUESTIONÁRIO ALONSO-GALLEGO-HONEY
 description: sobre estilos de aprendizagem
