@@ -1,5 +1,70 @@
 <script>
 
+Chart.defaults.font.size = 16;
+
+data = {
+        labels: ['Ativo', 'Reflexivo', 'Teórico', 'Pragmático'],
+        datasets: [{
+            label: 'Meu estilo de aprendizagem',
+            data: [0, 0, 0, 0],
+            fill: true,
+            backgroundColor: 'rgba(255, 99, 132, .2)',
+            borderColor: 'rgb(255, 99, 132)',
+            pointBackgroundColor: 'rgb(255, 99, 132)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgb(255, 99, 132)',
+            pointRadius: 5
+        }]
+    };
+
+plugin = {
+  id: 'custom_canvas_background_color',
+  beforeDraw: (chart) => {
+    const {ctx} = chart;
+    ctx.save();
+    ctx.globalCompositeOperation = 'destination-over';
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, chart.width, chart.height);
+    ctx.restore();
+  }
+};  
+
+config = {
+    type: 'radar',
+    data: data,
+  plugins: [plugin],
+  options: {
+    elements: {
+      line: {
+        borderWidth: 3
+      }
+    },
+    scales: {
+      r: {
+        pointLabels: {
+          font: {
+            size: 20
+          }
+        },
+        suggestedMin: 0,
+        suggestedMax: 20
+      }
+    }
+  },
+};
+
+ctx = document.getElementById('myChart').getContext('2d');
+myChart = new Chart(ctx, config);
+
+function addData(chart, label, data) {
+	chart.data.datasets[0].data = data;
+    chart.update();
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
 function analisar() {
 
     s = '<h2>Resultados:</h2><p>';
@@ -32,10 +97,8 @@ function analisar() {
         }
     }
     
-//     s += '<p>Resultados: ' + [ativo, reflexivo, teorico, pragmatico] + "</p>";
     result = resultado(ativo, reflexivo, teorico, pragmatico);
     
-//     s += "Pontos selecionados:" + respostas;
     s += "<h3>Seus estilos:</h3>";
     
     if(result.includes("ativo"))
@@ -49,6 +112,9 @@ function analisar() {
     
     document.getElementById("result").innerHTML = s;
     document.getElementById("limpar").hidden = false;
+
+    document.getElementById("canvasdiv").hidden = false;
+    addData(myChart, 'Meu estilo de aprendizagem', [ativo, reflexivo, teorico, pragmatico]);
 }
 
 function resultado(ativo, reflexivo, teorico, pragmatico) {
@@ -72,6 +138,8 @@ function limpar() {
         ponto.checked = false;
     }
     document.getElementById("limpar").hidden = true;
+    document.getElementById("canvasdiv").hidden = true;
+    addData(myChart, 'Meu estilo de aprendizagem', [0, 0, 0, 0]);
 }
 
 </script>
