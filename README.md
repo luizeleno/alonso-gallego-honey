@@ -10,6 +10,8 @@
 
 Este questionário serve para identificar seu estilo preferido de aprendizagem. Não existem respostas corretas nem erradas. Será útil desde que você seja sincero nas respostas.
 
+Disponível em <http://computeel.org/alonso-gallego-honey/>
+
 ## Para saber mais:
 
 1. Catalina M. Alonso, Domingo J. Gallego, Peter Honey, **Los Estilos de Aprendizaje: procedimientos de diagnostico y mejora.** Ediciones Mensajero, 7ª ed. Bilbao, 1995.
