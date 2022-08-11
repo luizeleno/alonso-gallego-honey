@@ -1,5 +1,5 @@
 ---
-title:  Teste Alonso-Gallego-Honey
+title:  Teste Alonso-Honey
 ---
 
 ### Este questionário serve para identificar seu estilo preferido de aprendizagem. Não existem respostas corretas nem erradas. Será útil desde que você seja sincero nas respostas.
